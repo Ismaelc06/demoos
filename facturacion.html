@@ -5,22 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tigo Business - Pago por Transferencia</title>
 
-    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        :root {
+            --tigo-blue: #00377B;
+            --tigo-dark: #001e42;
+            --bg-gray: #f4f6f9;
+            --text-color: #333;
+            --border-color: #ddd;
+            --success: #28a745;
+            --danger: #d9534f;
+            --orange: #f07c00;
+            --warning-bg: #fff3cd;
+            --warning-text: #856404;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-color);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: white;
+            padding: 15px 30px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 24px; font-weight: bold; color: var(--tigo-blue); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* --- BARRA DE RESUMEN FLOTANTE --- */
+        .summary-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--tigo-blue);
+            position: sticky;
+            top: 20px;
+            z-index: 100; /* Z-Index bajo para que el modal lo tape */
+        }
+
+        .summary-info { display: flex; gap: 40px; }
+        .summary-item label { display: block; font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+        .summary-item span { font-size: 24px; font-weight: bold; color: var(--tigo-blue); }
+
+        /* --- BOTONES --- */
+        .btn { padding: 12px 24px; border-radius: 4px; cursor: pointer; border: none; font-weight: 600; font-size: 14px; transition: 0.2s; }
+        .btn-primary { background: var(--tigo-blue); color: white; }
+        .btn-primary:hover { background: var(--tigo-dark); }
+        .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-outline { background: transparent; border: 1px solid var(--tigo-blue); color: var(--tigo-blue); }
+
+        /* --- FILTROS --- */
+        .filters-container {
+            background: #e9ecef; padding: 15px; border-radius: 8px 8px 0 0;
+            display: grid; grid-template-columns: repeat(4, 1fr) auto; gap: 15px; align-items: end;
+        }
+        .filter-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; color: var(--tigo-blue); }
+        .filter-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+
+        /* --- TABLA DE FACTURAS --- */
+        .invoice-table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .invoice-table th { background: #f1f3f5; color: #555; padding: 12px; text-align: left; font-size: 13px; border-bottom: 2px solid #ddd; }
+        .invoice-table td { padding: 15px 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .group-header { background-color: #f8f9fa; color: #666; font-weight: bold; font-size: 13px; border-top: 2px solid #e9ecef; }
+        
+        .service-icon { display: flex; justify-content: center; align-items: center; width: 35px; height: 35px; color: white; font-size: 18px; }
+        .icon-mobile { background-color: var(--tigo-blue); border-radius: 50%; }
+        .icon-wifi { background-color: var(--orange); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+        .status-pending { color: var(--danger); font-weight: bold; font-size: 12px; }
+        .status-paid { color: var(--success); font-weight: bold; font-size: 12px; }
+        .row-disabled { opacity: 0.6; background-color: #fafafa; }
+
+        /* --- MODAL (NUEVO) --- */
+        .loading-overlay, .modal-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.6); /* Fondo oscuro */
+            display: none;
+            justify-content: center; align-items: center; flex-direction: column;
+            z-index: 1000; /* Mayor que el sticky bar */
+        }
+        
+        .loading-overlay { background: rgba(255,255,255,0.9); }
+
+        .modal-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px; /* Ancho para que quepa la tabla */
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease-out;
+            position: relative;
+            max-height: 90vh; /* Para pantallas pequeñas */
+            overflow-y: auto; /* Scroll si es muy alto */
+        }
+
+        /* BOTÓN CERRAR (X) */
+        .close-btn {
+            position: absolute; top: 15px; right: 20px;
+            font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: 0.2s; line-height: 1;
+        }
+        .close-btn:hover { color: #333; }
+
+        /* ESTILO RESULTADO DENTRO DEL MODAL */
+        .id-display {
+            background: #f0f7ff; border: 2px dashed var(--tigo-blue);
+            padding: 15px; margin: 15px 0; border-radius: 8px;
+        }
+        .id-display h2 { margin: 0; font-size: 32px; color: var(--tigo-blue); letter-spacing: 2px; }
+
+        .alert-warning {
+            background-color: var(--warning-bg); color: var(--warning-text); border: 1px solid #ffeeba;
+            padding: 10px 20px; border-radius: 4px; margin: 15px auto; font-size: 14px;
+            display: inline-block; max-width: 90%;
+        }
+
+        /* TABLA DE BANCOS */
+        .bank-info-container { margin-top: 20px; text-align: left; }
+        .bank-table {
+            width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; border: 1px solid #eee;
+        }
+        .bank-table th {
+            background-color: #f1f3f5; padding: 10px; border-bottom: 2px solid #ddd; color: var(--tigo-blue); text-align: left;
+        }
+        .bank-table td { padding: 10px; border-bottom: 1px solid #eee; color: #555; }
+        .bank-table tr:hover { background-color: #f9f9f9; }
+
+        /* ANIMACIONES */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    </style>
 </head>
 <body>
-<div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
-    <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
-        &larr; Volver al Menú Principal
-    </a>
-</div>
+    <div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
+        <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
+            &larr; Volver al Menú Principal
+        </a>
+    </div>
+
     <header>
         <div class="logo">tigo business</div>
-        <div></div>
+        <div>Usuario: Tesorería | Empresa S.A.</div>
     </header>
 
     <div class="container">
 
-        <section id="view-selection" class="view-section active">
+        <section id="view-selection">
             
             <div class="summary-bar">
                 <div class="summary-info">
@@ -49,7 +198,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Periodo</label>
-                    <select><option>Todas</option><option>Nov 2025</option><option>Oct 2025</option></select>
+                    <select><option>Todas</option><option>Nov 2025</option></select>
                 </div>
                 <div class="filter-group">
                     <label>Estado de Factura</label>
@@ -67,122 +216,118 @@
                         <th>Nro. Comprobante</th>
                         <th>Periodo</th>
                         <th>Estado</th>
-                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="group-header">
-                        <td colspan="8">CONTRATO: 7529137 (Servicios Móviles)</td>
-                    </tr>
-                    
+                    <tr class="group-header"><td colspan="8">CONTRATO: 7529137 (Servicios Móviles)</td></tr>
                     <tr>
                         <td><input type="checkbox" class="invoice-chk" data-amount="23037.00" onchange="updateTotals()"></td>
                         <td><div class="service-icon icon-mobile">📱</div></td>
                         <td><strong>Bs 23.037,00</strong></td>
-                        <td>7529137</td>
-                        <td>4769359</td>
-                        <td>Nov 2025</td>
+                        <td>7529137</td> <td>4769359</td> <td>Nov 2025</td>
                         <td><span class="status-pending">PENDIENTE DE PAGO</span></td>
-                        <td><a href="#" style="color:var(--tigo-blue); text-decoration:none; font-weight:bold; font-size:12px;">DETALLES</a></td>
                     </tr>
-
                     <tr class="row-disabled">
                         <td><input type="checkbox" disabled></td>
                         <td><div class="service-icon icon-mobile">📱</div></td>
                         <td>Bs 22.905,80</td>
-                        <td>7529137</td>
-                        <td>4672689</td>
-                        <td>Oct 2025</td>
+                        <td>7529137</td> <td>4672689</td> <td>Oct 2025</td>
                         <td><span class="status-paid">PAGADO</span></td>
-                        <td><a href="#" style="color:var(--tigo-blue); text-decoration:none; font-weight:bold; font-size:12px;">DETALLES</a></td>
                     </tr>
 
-                    <tr class="group-header">
-                        <td colspan="8">EL 7MO ANILLO Y DOBLE VIA LA GUARDIA - 1385851</td>
-                    </tr>
-
+                    <tr class="group-header"><td colspan="8">EL 7MO ANILLO Y DOBLE VIA LA GUARDIA - 1385851</td></tr>
                     <tr>
                         <td><input type="checkbox" class="invoice-chk" data-amount="265.00" onchange="updateTotals()"></td>
                         <td><div class="service-icon icon-wifi">📶</div></td>
                         <td><strong>Bs 265,00</strong></td>
-                        <td>1385851</td>
-                        <td>76837919</td>
-                        <td>Feb 2026</td>
+                        <td>1385851</td> <td>76837919</td> <td>Feb 2026</td>
                         <td><span class="status-pending">PENDIENTE DE PAGO</span></td>
-                        <td><a href="#" style="color:var(--tigo-blue); text-decoration:none; font-weight:bold; font-size:12px;">DETALLES</a></td>
                     </tr>
-
                      <tr>
                         <td><input type="checkbox" class="invoice-chk" data-amount="265.00" onchange="updateTotals()"></td>
                         <td><div class="service-icon icon-wifi">📶</div></td>
                         <td><strong>Bs 265,00</strong></td>
-                        <td>1385851</td>
-                        <td>75915485</td>
-                        <td>Ene 2026</td>
+                        <td>1385851</td> <td>75915485</td> <td>Ene 2026</td>
                         <td><span class="status-pending">PENDIENTE DE PAGO</span></td>
-                        <td><a href="#" style="color:var(--tigo-blue); text-decoration:none; font-weight:bold; font-size:12px;">DETALLES</a></td>
                     </tr>
-
                 </tbody>
             </table>
-
             <p style="font-size: 12px; color: #666; margin-top: 20px;">
                 * Se generará un ID único para el pago de las cuentas seleccionadas. Este tiene una vigencia de 72hr.
             </p>
-
         </section>
 
-        <section id="view-result" class="view-section">
-            <div style="margin-bottom: 20px;">
-                <button class="btn btn-outline" onclick="location.reload()">&larr; Volver a facturas</button>
+    </div>
+
+    <div id="loader" class="loading-overlay">
+        <div class="spinner"></div>
+        <h3 style="color: var(--tigo-blue); margin-top: 20px;">Conectando con Síntesis...</h3>
+        <p>Generando orden de recaudación.</p>
+    </div>
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+
+            <div style="font-size: 50px; color: var(--success); margin-bottom: 10px;">✅</div>
+            <h3 style="color: var(--tigo-blue); margin-top: 0;">¡ID Generado Exitosamente!</h3>
+            
+            <div class="alert-warning">
+                ⚠️ <strong>Atención:</strong> Tiene un máximo de <strong>72 horas</strong> para usar este ID, de lo contrario expirará y deberá generar uno nuevo.
             </div>
 
-            <div class="result-box">
-                <div style="font-size: 50px; color: var(--success); margin-bottom: 10px;">✅</div>
-                <h3 style="color: var(--tigo-blue); margin-top: 0;">¡ID Generado Exitosamente!</h3>
-                <p>Utilice la siguiente información para realizar su transferencia bancaria.</p>
 
-                <div class="id-display">
-                    <small style="text-transform: uppercase; color: #666; display: block; margin-bottom: 5px;">ID de Pago (Glosa)</small>
-                    <h2 id="final-id">12345678912</h2>
+            <div class="id-display">
+                <small style="text-transform: uppercase; color: #666; display: block; margin-bottom: 5px;">ID de Pago (Glosa)</small>
+                <h2 id="final-id">12345678912</h2>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 50px; padding: 10px 0;">
+                <div>
+                    <small style="color: #666;">Monto Total</small>
+                    <div style="font-size: 24px; font-weight: bold; color: var(--tigo-dark);" id="final-amount">Bs 0,00</div>
                 </div>
-
-                <div style="display: flex; justify-content: space-between; padding: 10px 50px;">
-                    <div>
-                        <small style="color: #666;">Monto Total</small>
-                        <div style="font-size: 24px; font-weight: bold; color: var(--tigo-dark);" id="final-amount">Bs 0,00</div>
-                    </div>
-                    <div>
-                        <small style="color: #666;">Vigencia</small>
-                        <div style="font-size: 20px; font-weight: bold; color: var(--danger);">72 Horas</div>
-                    </div>
-                </div>
-
-                <div class="bank-list">
-                    <strong>🏦 Instrucciones para Transferencia:</strong>
-                    <p>Realice la transferencia a cualquiera de las siguientes cuentas y asegúrese de colocar el <strong>ID de Pago</strong> en la glosa/referencia.</p>
-                    <ul style="margin: 0; padding-left: 20px;">
-                        <li><strong>Banco Nacional (BNB):</strong> 1000-2548-7788</li>
-                        <li><strong>Banco Mercantil Santa Cruz:</strong> 4010-5588-9966</li>
-                        <li><strong>Banco Bisa:</strong> 2000-1122-3344</li>
-                    </ul>
-                </div>
-
-                <div style="margin-top: 30px;">
-                    
-                    <button class="btn btn-outline" style="margin-left: 10px;">Descargar Instrucciones (PDF)</button>
+                <div>
+                    <small style="color: #666;">Vigencia</small>
+                    <div style="font-size: 20px; font-weight: bold; color: var(--danger);">72 Horas</div>
                 </div>
             </div>
-        </section>
 
-        <div id="loader" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); justify-content:center; align-items:center; flex-direction:column; z-index: 999;">
-            <div style="border: 4px solid #f3f3f3; border-top: 4px solid var(--tigo-blue); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
-            <h3 style="color: var(--tigo-blue); margin-top: 20px;">Conectando con Síntesis...</h3>
-            <p>Generando orden de recaudación.</p>
+            <div class="bank-info-container">
+                <p style="font-size: 14px;"><strong>🏦 Cuentas habilitadas:</strong></p>
+                <table class="bank-table">
+                    <thead>
+                        <tr>
+                            <th>Banco</th>
+                            <th>Tipo de Cuenta</th>
+                            <th>Moneda</th>
+                            <th>Doc. Identificación</th>
+                            <th>Razón Social</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Banco Ganadero</td>
+                            <td>Cuenta de Ahorros</td>
+                            <td>Bolivianos</td>
+                            <td>NIT (1020539025)</td>
+                            <td>Telecel S.A.</td>
+                        </tr>
+                        <tr>
+                            <td>Banco Nacional (BNB)</td>
+                            <td>Cuenta de Ahorros</td>
+                            <td>Dólares</td>
+                            <td>NIT (1020539025)</td>
+                            <td>Telecel S.A.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button class="btn btn-outline" style="margin-left: 10px;">Descargar Instrucciones (PDF)</button>
+            </div>
         </div>
-
-        <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
-
     </div>
 
     <script>
@@ -195,32 +340,28 @@
                 total += parseFloat(chk.getAttribute('data-amount'));
             });
 
-            // Actualizar UI
             document.getElementById('count-display').innerText = count;
             document.getElementById('total-display').innerText = 'Bs ' + total.toLocaleString('es-BO', { minimumFractionDigits: 2 });
-            
-            // Habilitar botón si hay selección
             document.getElementById('btn-generate').disabled = (count === 0);
         }
 
         function generatePaymentId() {
-            // Mostrar Loader
             document.getElementById('loader').style.display = 'flex';
-
-            // Simular API Call (2 segundos)
             setTimeout(() => {
                 const totalText = document.getElementById('total-display').innerText;
-                
-                // Actualizar datos de la vista final
                 document.getElementById('final-amount').innerText = totalText;
-                // Generar ID random simulado
                 document.getElementById('final-id').innerText = Math.floor(10000000000 + Math.random() * 90000000000);
-
-                // Cambiar vista
+                
                 document.getElementById('loader').style.display = 'none';
-                document.getElementById('view-selection').classList.remove('active');
-                document.getElementById('view-result').classList.add('active');
+                
+                // MOSTRAR MODAL EN LUGAR DE CAMBIAR DE VISTA
+                document.getElementById('payment-modal').style.display = 'flex';
             }, 2000);
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById('payment-modal').style.display = 'none';
         }
     </script>
 
