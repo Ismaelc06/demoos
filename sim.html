@@ -309,23 +309,20 @@
 </head>
 
 <body>
-    <div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
-        <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
-            &larr; Volver al Menú Principal
-        </a>
-    </div>
+    
 
     <header>
         <div class="logo">tigo business</div>
-        <div style="font-size: 14px;">Usuario: Admin Empresa | Contrato #7529137</div>
+        <div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
+        <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
+            Volver al Menú Principal
+        </a>
+    </div>
     </header>
 
     <div class="container">
 
         <section id="view-2" class="view-section active">
-            <div style="margin-bottom: 15px;">
-                <a class="link-action" onclick="changeView('view-1')">&larr; Volver a lista</a>
-            </div>
 
             <h2 style="margin-top:0;">Gestionando Línea: <span id="selected-line-display"
                     style="color: var(--tigo-blue);">62240273</span></h2>
@@ -367,8 +364,8 @@
 
 
         <section id="view-3" class="view-section">
-            <div style="margin-bottom: 15px;">
-                <a class="link-action" onclick="changeView('view-2')">&larr; Cancelar y Volver</a>
+            <div style=" margin-bottom: 15px;">
+                <a class="link-action" onclick="changeView('view-2')"> Cancelar y Volver</a>
             </div>
 
             <div class="card">
@@ -381,10 +378,10 @@
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="form-group">
-                        <label>Nro. de Línea (Solo lectura)</label>
-                        <input type="text" id="form-line-number" class="form-control1"
-                            style="background: #f4f4f4; border: 1px solid #ccc; border-radius: 4px;" readonly>
-                    </div>
+    <label>Nro. de Línea (Solo lectura)</label>
+    <input type="text" id="form-line-number" class="form-control1" value="62240273"
+        style="background: #f4f4f4; border: 1px solid #ccc; border-radius: 4px;" readonly>
+</div>
 
                     <div class="form-group">
                         <label>Nuevo Nro. de SIM Card (ICCID)</label>
@@ -461,7 +458,7 @@
             <div
                 style="background: #f9f9f9; padding: 15px; text-align: left; margin: 20px 0; border-radius: 4px; font-size: 14px; border: 1px solid #eee;">
                 <strong>ID Transacción:</strong> #TX-998877<br>
-                <strong>Línea:</strong> 77690052<span id="success-line"></span><br>
+                <strong>Línea:</strong> 62240273<span id="success-line"></span><br>
 
             </div>
 
