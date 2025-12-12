@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,12 @@
             justify-content: space-between;
             align-items: center;
         }
-        .logo { font-size: 24px; font-weight: bold; color: var(--tigo-blue); }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--tigo-blue);
+        }
 
         /* CONTENEDOR PRINCIPAL */
         .container {
@@ -44,7 +50,7 @@
         .card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             padding: 25px;
             margin-bottom: 20px;
         }
@@ -58,15 +64,50 @@
             font-weight: 500;
             transition: 0.2s;
         }
-        .btn-primary { background: var(--tigo-blue); color: white; }
-        .btn-primary:hover { background: var(--tigo-dark); }
-        .btn-outline { background: white; border: 1px solid var(--tigo-blue); color: var(--tigo-blue); }
-        .link-action { color: var(--tigo-blue); text-decoration: none; font-weight: bold; cursor: pointer; }
+
+        .btn-primary {
+            background: var(--tigo-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--tigo-dark);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--tigo-blue);
+            color: var(--tigo-blue);
+        }
+
+        .link-action {
+            color: var(--tigo-blue);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
         /* VISTAS (Navegación) */
-        .view-section { display: none; animation: fadeIn 0.3s; }
-        .view-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .view-section {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* ESTILOS ESPECÍFICOS: VISTA 2 (ADMIN LINEA) */
         .dashboard-grid {
@@ -74,18 +115,25 @@
             grid-template-columns: 250px 1fr;
             gap: 20px;
         }
+
         .sidebar-menu {
             background: white;
             border: 1px solid #eee;
             border-radius: 8px;
         }
+
         .menu-item {
             padding: 15px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
             color: #555;
         }
-        .menu-item:hover { background-color: #f9f9f9; color: var(--tigo-blue); }
+
+        .menu-item:hover {
+            background-color: #f9f9f9;
+            color: var(--tigo-blue);
+        }
+
         .menu-item.active {
             border-left: 4px solid var(--tigo-blue);
             background-color: #f0f7ff;
@@ -101,9 +149,17 @@
             margin-bottom: 20px;
         }
 
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-        
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
         .input-group {
             display: flex;
             align-items: center;
@@ -111,6 +167,7 @@
             border-radius: 4px;
             overflow: hidden;
         }
+
         .input-prefix {
             background-color: #e9ecef;
             padding: 10px 15px;
@@ -118,6 +175,7 @@
             font-weight: bold;
             border-right: 1px solid #ccc;
         }
+
         .form-control1 {
             border: none;
             padding: 10px;
@@ -133,7 +191,7 @@
             outline: none;
             font-size: 16px;
         }
-        
+
         .file-upload-box {
             border: 2px dashed #ccc;
             padding: 20px;
@@ -142,8 +200,17 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .file-upload-box:hover { border-color: var(--tigo-blue); background-color: #f0f7ff; }
-        .file-upload-box p { margin: 5px 0 0; font-size: 12px; color: #888; }
+
+        .file-upload-box:hover {
+            border-color: var(--tigo-blue);
+            background-color: #f0f7ff;
+        }
+
+        .file-upload-box p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #888;
+        }
 
         .warning-box {
             background-color: #fff3cd;
@@ -158,21 +225,34 @@
         }
 
         /* ESTADO DE CARGA Y MODAL DE ÉXITO */
-        .loading-overlay, .modal-overlay {
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.6);
+        .loading-overlay,
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
             display: none;
-            justify-content: center; align-items: center; flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             z-index: 999;
         }
-        
-        .loading-overlay { background: rgba(255,255,255,0.9); }
+
+        .loading-overlay {
+            background: rgba(255, 255, 255, 0.9);
+        }
 
         .spinner {
-            border: 4px solid #f3f3f3; border-top: 4px solid var(--tigo-blue);
-            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--tigo-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
         }
-        
+
         /* ESTILO DEL MODAL BOX */
         .modal-box {
             background: white;
@@ -181,9 +261,10 @@
             width: 90%;
             max-width: 500px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             animation: popIn 0.3s ease-out;
-            position: relative; /* Importante para posicionar la X */
+            position: relative;
+            /* Importante para posicionar la X */
         }
 
         /* ESTILO DEL BOTÓN DE CERRAR (X) */
@@ -198,15 +279,35 @@
             transition: 0.2s;
             line-height: 1;
         }
+
         .close-btn:hover {
             color: #333;
         }
 
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
 
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
         <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
@@ -225,8 +326,9 @@
             <div style="margin-bottom: 15px;">
                 <a class="link-action" onclick="changeView('view-1')">&larr; Volver a lista</a>
             </div>
-            
-            <h2 style="margin-top:0;">Gestionando Línea: <span id="selected-line-display" style="color: var(--tigo-blue);">62240273</span></h2>
+
+            <h2 style="margin-top:0;">Gestionando Línea: <span id="selected-line-display"
+                    style="color: var(--tigo-blue);">62240273</span></h2>
 
             <div class="dashboard-grid">
                 <div class="sidebar-menu">
@@ -236,17 +338,22 @@
                     <div class="menu-item">Mis Megas por App</div>
                     <div class="menu-item">Detalle de llamadas</div>
                     <div class="menu-item">Registro de IMEI</div>
-                    <div class="menu-item active" onclick="goToSimForm()">Cambio de Sim Card</div> 
+
+                    <div class="menu-item active" onclick="goToSimForm()">Cambio de Sim Card (Web)</div>
+                    <div class="menu-item" onclick="window.location.href='sim2.html'">Cambio de Sim Card V2 (Móvil)
+                    </div>
                 </div>
 
                 <div id="line-dashboard-content" class="card">
                     <h3>Resumen de la línea</h3>
                     <div style="display: flex; gap: 20px; margin-top: 20px;">
-                        <div style="flex: 1; text-align: center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
+                        <div
+                            style="flex: 1; text-align: center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
                             <h1 style="color: var(--tigo-blue); margin: 0;">2.5 GB</h1>
                             <p>Internet Disponible</p>
                         </div>
-                        <div style="flex: 1; text-align: center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
+                        <div
+                            style="flex: 1; text-align: center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
                             <h1 style="color: var(--tigo-blue); margin: 0;">Bs 0.45</h1>
                             <p>Saldo Principal</p>
                         </div>
@@ -266,33 +373,39 @@
 
             <div class="card">
                 <h2 class="form-section-title">Solicitud de Cambio de SIM Card</h2>
-                
+
                 <div class="warning-box">
-                    <span>⚠️ <strong>Importante:</strong> Asegúrese de que los documentos sean legibles y vigentes.</span>
+                    <span>⚠️ <strong>Importante:</strong> Asegúrese de que los documentos sean legibles y
+                        vigentes.</span>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="form-group">
                         <label>Nro. de Línea (Solo lectura)</label>
-                        <input type="text" id="form-line-number" class="form-control1" style="background: #f4f4f4; border: 1px solid #ccc; border-radius: 4px;" readonly>
+                        <input type="text" id="form-line-number" class="form-control1"
+                            style="background: #f4f4f4; border: 1px solid #ccc; border-radius: 4px;" readonly>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Nuevo Nro. de SIM Card (ICCID)</label>
                         <div class="input-group">
-                            <div class="input-prefix">8959103000</div> <input type="text" placeholder="Ingrese los dígitos restantes" maxlength="10" class="form-control">
+                            <div class="input-prefix">8959103000</div> <input type="text"
+                                placeholder="Ingrese los dígitos restantes" maxlength="10" class="form-control">
                         </div>
-                        <small style="color: #666; font-size: 12px;">Ingrese únicamente los números que aparecen después del prefijo.</small>
+                        <small style="color: #666; font-size: 12px;">Ingrese únicamente los números que aparecen después
+                            del prefijo.</small>
                     </div>
                 </div>
 
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
 
-                <h3 style="font-size: 16px; color: var(--tigo-blue); margin-bottom: 15px;">Validación de Identidad (Requerido)</h3>
-                
+                <h3 style="font-size: 16px; color: var(--tigo-blue); margin-bottom: 15px;">Validación de Identidad
+                    (Requerido)</h3>
+
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
                     <div>
-                        <label style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">1. Foto Selfie</label>
+                        <label style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">1. Foto
+                            Selfie</label>
                         <div class="file-upload-box" onclick="document.getElementById('file-selfie').click()">
                             <span style="font-size: 24px;">📸</span>
                             <p>Click para subir foto</p>
@@ -302,7 +415,8 @@
                     </div>
 
                     <div>
-                        <label style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">2. Foto CI (Anverso)</label>
+                        <label style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">2. Foto
+                            CI (Anverso)</label>
                         <div class="file-upload-box" onclick="document.getElementById('file-ci-front').click()">
                             <span style="font-size: 24px;">🆔</span>
                             <p>Click para subir anverso</p>
@@ -311,7 +425,8 @@
                     </div>
 
                     <div>
-                        <label style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">3. Foto CI (Reverso)</label>
+                        <label style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">3. Foto
+                            CI (Reverso)</label>
                         <div class="file-upload-box" onclick="document.getElementById('file-ci-back').click()">
                             <span style="font-size: 24px;">🆔</span>
                             <p>Click para subir reverso</p>
@@ -338,17 +453,18 @@
     <div id="success-modal" class="modal-overlay">
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            
+
             <div style="font-size: 60px; color: var(--success); margin-bottom: 20px;">✅</div>
             <h2 style="color: var(--tigo-blue); margin-top: 0;">¡Transacción Exitosa!</h2>
             <p style="color: #666; font-size: 16px;">El cambio de SIM Card ha sido procesado correctamente.</p>
-            
-            <div style="background: #f9f9f9; padding: 15px; text-align: left; margin: 20px 0; border-radius: 4px; font-size: 14px; border: 1px solid #eee;">
+
+            <div
+                style="background: #f9f9f9; padding: 15px; text-align: left; margin: 20px 0; border-radius: 4px; font-size: 14px; border: 1px solid #eee;">
                 <strong>ID Transacción:</strong> #TX-998877<br>
-                <strong>Línea:</strong> <span id="success-line"></span><br>
-               
+                <strong>Línea:</strong> 77690052<span id="success-line"></span><br>
+
             </div>
-            
+
             <button class="btn btn-primary" onclick="location.reload()" style="width: 100%;">Volver al Inicio</button>
             <div style="margin-top: 15px;">
                 <a href="#" class="link-action">📥 Descargar Comprobante (PDF)</a>
@@ -388,4 +504,5 @@
         }
     </script>
 </body>
+
 </html>
