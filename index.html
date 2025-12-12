@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Tigo </title>
+    <style>
+        :root {
+            --tigo-blue: #00377B;
+            --tigo-dark: #001e42;
+            --bg-gray: #f4f6f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-gray);
+            color: #333;
+        }
+
+        header {
+            background-color: white;
+            padding: 20px 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--tigo-blue);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--tigo-blue);
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 5px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--tigo-blue);
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin: 0;
+            color: var(--tigo-blue);
+            font-size: 20px;
+        }
+
+        .card p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            color: #777;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">tigo business</div>
+        <div style="color: #666;"></div>
+    </header>
+
+    <div class="container">
+        <h1>DEMOS </h1>
+        <p></p>
+
+        <div class="grid-menu">
+            
+            <a href="wifi.html" class="card">
+                <div class="icon">📶</div>
+                <h3>Gestión de Wifi</h3>
+
+            </a>
+
+            <a href="facturacion.html" class="card">
+                <div class="icon">🧾</div>
+                <h3>Pago de Facturas</h3>
+               
+            </a>
+
+            <a href="sim.html" class="card">
+                <div class="icon">📲</div>
+                <h3>Cambio de SIM Card</h3>
+                
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

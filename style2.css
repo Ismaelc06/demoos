@@ -1,0 +1,195 @@
+
+        /* --- ESTILOS GENERALES --- */
+        :root {
+            --tigo-blue: #00377B;
+            --tigo-dark: #001e42;
+            --bg-gray: #f4f6f9;
+            --text-color: #333;
+            --border-color: #ddd;
+            --success: #28a745;
+            --danger: #d9534f;
+            --orange: #f07c00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-color);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: white;
+            padding: 15px 30px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 24px; font-weight: bold; color: var(--tigo-blue); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* --- BARRA DE RESUMEN FLOTANTE (STICKY) --- */
+        .summary-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--tigo-blue);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .summary-info {
+            display: flex;
+            gap: 40px;
+        }
+
+        .summary-item label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-item span {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--tigo-blue);
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .btn-primary { background: var(--tigo-blue); color: white; }
+        .btn-primary:hover { background: var(--tigo-dark); }
+        .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-outline { background: transparent; border: 1px solid var(--tigo-blue); color: var(--tigo-blue); }
+
+        /* --- FILTROS --- */
+        .filters-container {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 15px;
+            align-items: end;
+        }
+        .filter-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; color: var(--tigo-blue); }
+        .filter-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+
+        /* --- TABLA DE FACTURAS --- */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .invoice-table th {
+            background: #f1f3f5;
+            color: #555;
+            padding: 12px;
+            text-align: left;
+            font-size: 13px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .invoice-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        /* Agrupación por Contrato (Estilo Header Gris) */
+        .group-header {
+            background-color: #f8f9fa;
+            color: #666;
+            font-weight: bold;
+            font-size: 13px;
+            border-top: 2px solid #e9ecef;
+        }
+        .group-header td { padding: 10px 15px; }
+
+        /* Iconos de Servicio */
+        .service-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            color: white;
+            font-size: 18px;
+        }
+        .icon-mobile {
+            background-color: var(--tigo-blue);
+            border-radius: 50%; /* Círculo como imagen 1 */
+        }
+        .icon-wifi {
+            background-color: var(--orange);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); /* Hexágono como imagen 2 */
+        }
+
+        /* Estados */
+        .status-pending { color: var(--danger); font-weight: bold; font-size: 12px; }
+        .status-paid { color: var(--success); font-weight: bold; font-size: 12px; }
+        
+        /* Filas deshabilitadas */
+        .row-disabled { opacity: 0.6; background-color: #fafafa; }
+        .row-disabled input { cursor: not-allowed; }
+
+        /* --- MODAL Y VISTAS --- */
+        .view-section { display: none; animation: fadeIn 0.3s; }
+        .view-section.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-box {
+            background: white;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .id-display {
+            background: #f0f7ff;
+            border: 2px dashed var(--tigo-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .id-display h2 { margin: 0; font-size: 32px; color: var(--tigo-blue); letter-spacing: 2px; }
+        
+        .bank-list {
+            text-align: left;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
