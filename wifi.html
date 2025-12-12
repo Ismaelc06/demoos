@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,312 +15,547 @@
             --warning: #ffc107;
             --danger: #d9534f;
         }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--bg-gray); color: var(--text-dark); }
-        
-        /* HEADER */
-        header { background: white; padding: 15px 30px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: bold; color: var(--tigo-blue); }
 
-        /* CONTENEDOR */
-        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-
-        /* BREADCRUMB */
-        .breadcrumb { margin-bottom: 20px; color: #666; font-size: 14px; }
-        .breadcrumb a { color: var(--tigo-blue); text-decoration: none; }
-
-        /* HEADER DEL CONTRATO */
-        .contract-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .status-badge { background-color: #e6f9e6; color: var(--success); padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .dot { width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; }
-
-        /* TARJETAS */
-        .card { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 20px; }
-
-        /* TABS */
-        .tabs { display: flex; border-bottom: 1px solid #ddd; margin-bottom: 25px; }
-        .tab { padding: 12px 25px; cursor: pointer; color: #666; border-bottom: 3px solid transparent; }
-        .tab.active { border-bottom: 3px solid var(--tigo-blue); color: var(--tigo-blue); font-weight: bold; }
-        
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* TABLAS */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { text-align: left; padding: 12px; background: #f8f9fa; color: #555; border-bottom: 2px solid #eee; }
-        td { padding: 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
-
-        /* INFO GRID */
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .info-item label { display: block; font-size: 12px; color: #888; margin-bottom: 4px; }
-        .info-item span { font-weight: 500; font-size: 15px; }
-
-        /* BOTONES */
-        .btn { padding: 8px 16px; border-radius: 4px; cursor: pointer; border: none; font-size: 14px; }
-        .btn-primary { background: var(--tigo-blue); color: white; }
-        .btn-outline { border: 1px solid var(--tigo-blue); color: var(--tigo-blue); background: white; }
-        .btn-danger-outline { border: 1px solid var(--danger); color: var(--danger); background: white; }
-
-        /* MODAL */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; }
-        .modal-box { background: white; padding: 30px; border-radius: 8px; width: 400px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group input, .form-group select { width: 100%; padding: 8px; box-sizing: border-box; }
-        
-        /* SWITCH */
-        .switch { position: relative; display: inline-block; width: 34px; height: 20px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--tigo-blue); }
-        input:checked + .slider:before { transform: translateX(14px); }
-
-        /* ESTILOS DE SEÑAL */
-        .signal-container { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px; }
-        .signal-icon svg { width: 20px; height: 20px; }
-        .sig-good { fill: var(--success); color: var(--success); }
-        .sig-mid { fill: var(--warning); color: #e0a800; }
-        .sig-bad { fill: var(--danger); color: var(--danger); }
-
-    </style>
-</head>
-<body>
-
-<header>
-    <div class="logo">tigo business</div>
-    <div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
-    <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
-        &larr; Volver al Menú Principal
-    </a>
-</div>
-</header>
-
-<div class="container">
-    <div class="breadcrumb">
-        <a href="#">&larr; Volver a Mis Contratos</a> / Contrato #1464997 - Barrio Las Palmas
-    </div>
-
-    <div class="contract-header">
-        <div>
-            <h1 style="margin: 0; color: var(--tigo-blue);">Gestionar Mi Wifi</h1>
-            <p style="margin: 5px 0 0 0; color: #666;">Plan: Empresa Ultra, BBI110 MBPS </p>
-        </div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <div class="status-badge"><div class="dot"></div>Tu dispositivo está Online</div>
-            <button class="btn btn-danger-outline">🔄 Reiniciar Módem</button>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('mired')">Mi Red (Estado)</div>
-            <div class="tab" onclick="switchTab('ajustes')">Ajustes Wi-Fi</div>
-        </div>
-
-        <div id="mired" class="tab-content active">
-            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #e9ecef;">
-                <h4 style="margin-top: 0; margin-bottom: 15px;">Información Técnica</h4>
-                <div class="info-grid">
-                    <div class="info-item"><label>Dirección IP WAN</label><span>190.180.12.45</span></div>
-                    <div class="info-item"><label>Dirección MAC</label><span>A1:B2:C3:D4:E5</span></div>
-                    <div class="info-item"><label>Modelo de Modem</label><span>Arris TG2482</span></div>
-                    <div class="info-item"><label>Firmware</label><span>v9.1.2_TG</span></div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--tigo-blue);">Dispositivos Conectados (3)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre Host</th>
-                        <th>Tipo Conexión</th>
-                        <th>Dirección IP</th>
-                        <th>MAC Address</th>
-                        <th>Estado de la señal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Galaxy-J4</strong></td>
-                        <td>📶 Wifi 5GHz</td>
-                        <td>192.168.0.15</td>
-                        <td>AA:BB:CC:11:22</td>
-                        <td>
-                            <div class="signal-container sig-good">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-    <path d="M12.01 21.49L23.64 7c-.45-.34-4.93-4-11.64-4C5.28 3 .81 6.66.36 7l11.63 14.49.01.01.01-.01z"/>
-</svg>
-                                Buena
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Unknown</strong></td>
-                        <td>📶 Wifi 2.4GHz</td>
-                        <td>192.168.0.20</td>
-                        <td>11:22:33:44:55</td>
-                        <td>
-                             <div class="signal-container sig-mid">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-    <path d="M12.01 21.49L23.64 7c-.45-.34-4.93-4-11.64-4C5.28 3 .81 6.66.36 7l11.63 14.49.01.01.01-.01z" opacity="0.3"/>
-    <path d="M3.53 10.95l8.46 10.54.01.01.01-.01 8.46-10.54C20.04 10.62 16.81 8 12 8c-4.81 0-8.04 2.62-8.47 2.95z"/>
-</svg>
-                                Regular
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Huawei_P20_lite</strong></td>
-                        <td>📶 Wifi 2.4GHz</td>
-                        <td>192.168.0.45</td>
-                        <td>DD:EE:FF:66:77</td>
-                         <td>
-                             <div class="signal-container sig-bad">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-    <path d="M12.01 21.49L23.64 7c-.45-.34-4.93-4-11.64-4C5.28 3 .81 6.66.36 7l11.63 14.49.01.01.01-.01z" opacity="0.3"/>
-    <path d="M6.67 14.86L12 21.49l5.33-6.63C17.07 14.65 15.03 13 12 13s-5.07 1.65-5.33 1.86z"/>
-</svg>
-                                Débil
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="ajustes" class="tab-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <h3 style="margin: 0; color: var(--tigo-blue);">Mis Redes (SSIDs)</h3>
-                <span style="font-size: 13px; color: #666;">Configura aquí tus redes 2.4Ghz, 5Ghz e Invitados</span>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre de Red (SSID)</th>
-                        <th>Banda</th>
-                        <th>Tipo</th>
-                        <th>Habilitada</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Tigo_Oficina_2.4</strong></td>
-                        <td>2.4 GHz</td>
-                        <td>Principal</td>
-                        <td>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" onclick="openModal('Tigo_Oficina_2.4', '2.4')">Editar</button>
-                            <button class="btn btn-outline">📱 QR</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tigo_Oficina_5G</strong></td>
-                        <td>5 GHz</td>
-                        <td>Principal</td>
-                        <td>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" onclick="openModal('Tigo_Oficina_5G', '5')">Editar</button>
-                            <button class="btn btn-outline">📱 QR</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Visitas_Empresa</strong> <span style="font-size: 12px; color: #888;">(Oculta)</span></td>
-                        <td>2.4 GHz</td>
-                        <td>Invitado</td>
-                        <td>
-                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" onclick="openModal('Visitas_Empresa', '2.4')">Editar</button>
-                            <button class="btn btn-outline" disabled style="opacity: 0.5;">📱 QR</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div id="modal" class="modal-overlay">
-    <div class="modal-box">
-        <h3 id="modal-title" style="margin-top: 0; color: var(--tigo-blue);">Editar Red</h3>
-        <p id="modal-subtitle" style="font-size: 13px; color: #666; margin-top: -10px;">Configurando frecuencia</p>
-        
-        <div class="form-group">
-            <label style="font-weight: 500; display: block; margin-bottom: 5px;">Nombre de Red (SSID)</label>
-            <input type="text" id="ssid-input" value="">
-        </div>
-        <div class="form-group">
-            <label style="font-weight: 500; display: block; margin-bottom: 5px;">Contraseña Wi-Fi</label>
-            <input type="password" value="ClaveSegura123">
-        </div>
-        
-        <div class="form-group">
-            <label style="font-weight: 500; display: block; margin-bottom: 5px;">Canal de Transmisión</label>
-            <select id="channel-select">
-                </select>
-        </div>
-        
-        <div style="text-align: right; margin-top: 20px;">
-            <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
-            <button class="btn btn-primary" onclick="closeModal()">Guardar</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function switchTab(tabName) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        
-        event.target.classList.add('active');
-        document.getElementById(tabName).classList.add('active');
-    }
-
-    // LISTAS DE CANALES SEGÚN ESTÁNDAR
-    const channels24 = ["Automático (Recomendado)", "Canal 1", "Canal 6", "Canal 11"];
-    const channels5 = ["Automático (Recomendado)", "Canal 149", "Canal 153", "Canal 157", "Canal 161", "Canal 165"];
-
-    function openModal(ssid, frequency) {
-        // 1. Poner datos básicos
-        document.getElementById('ssid-input').value = ssid;
-        document.getElementById('modal-title').innerText = 'Editar: ' + ssid;
-        document.getElementById('modal-subtitle').innerText = 'Frecuencia detectada: ' + frequency + ' GHz';
-        
-        // 2. Lógica para llenar el Select de Canales
-        const select = document.getElementById('channel-select');
-        select.innerHTML = ""; // Limpiar opciones anteriores
-
-        let optionsToAdd = [];
-
-        if (frequency === '5') {
-            optionsToAdd = channels5;
-        } else {
-            optionsToAdd = channels24; // Por defecto o si es 2.4
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
         }
 
-        // Crear las opciones en el HTML
-        optionsToAdd.forEach(channel => {
-            let opt = document.createElement('option');
-            opt.value = channel;
-            opt.innerHTML = channel;
-            select.appendChild(opt);
-        });
+        /* HEADER */
+        header {
+            background: white;
+            padding: 15px 30px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        // 3. Mostrar Modal
-        document.getElementById('modal').style.display = 'flex';
-    }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--tigo-blue);
+        }
 
-    function closeModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-</script>
+        /* CONTENEDOR */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--tigo-blue);
+            text-decoration: none;
+        }
+
+        /* HEADER DEL CONTRATO */
+        .contract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .status-badge {
+            background-color: #e6f9e6;
+            color: var(--success);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+        }
+
+        /* TARJETAS */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid var(--tigo-blue);
+            color: var(--tigo-blue);
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            background: #f8f9fa;
+            color: #555;
+            border-bottom: 2px solid #eee;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        /* INFO GRID */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .info-item span {
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        /* BOTONES */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--tigo-blue);
+            color: white;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--tigo-blue);
+            color: var(--tigo-blue);
+            background: white;
+        }
+
+        .btn-danger-outline {
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            background: white;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        /* SWITCH */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--tigo-blue);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+
+        /* ESTILOS DE SEÑAL */
+        .signal-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .signal-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sig-good {
+            fill: var(--success);
+            color: var(--success);
+        }
+
+        .sig-mid {
+            fill: var(--warning);
+            color: #e0a800;
+        }
+
+        .sig-bad {
+            fill: var(--danger);
+            color: var(--danger);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">tigo business</div>
+        <div style="background: #e9ecef; padding: 10px 40px; border-bottom: 1px solid #ddd;">
+            <a href="index.html" style="text-decoration: none; color: #00377B; font-weight: 600; font-size: 14px;">
+                &larr; Volver al Menú Principal
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#">&larr; Volver a Mis Contratos</a> / Contrato #1464997 - Barrio Las Palmas
+        </div>
+
+        <div class="contract-header">
+            <div>
+                <h1 style="margin: 0; color: var(--tigo-blue);">Gestionar Mi Wifi</h1>
+                <p style="margin: 5px 0 0 0; color: #666;">Plan: Empresa Ultra, BBI110 MBPS </p>
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <div class="status-badge">
+                    <div class="dot"></div>Tu dispositivo está Online
+                </div>
+                <button class="btn btn-danger-outline">🔄 Reiniciar Módem</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('mired')">Mi Red (Estado)</div>
+                <div class="tab" onclick="switchTab('ajustes')">Ajustes Wi-Fi</div>
+            </div>
+
+            <div id="mired" class="tab-content active">
+                <div
+                    style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #e9ecef;">
+                    <h4 style="margin-top: 0; margin-bottom: 15px;">Información Técnica</h4>
+                    <div class="info-grid">
+                        <div class="info-item"><label>Dirección IP WAN</label><span>190.180.12.45</span></div>
+                        <div class="info-item"><label>Dirección MAC</label><span>A1:B2:C3:D4:E5</span></div>
+                        <div class="info-item"><label>Modelo de Modem</label><span>Arris TG2482</span></div>
+                        <div class="info-item"><label>Firmware</label><span>v9.1.2_TG</span></div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--tigo-blue);">Dispositivos Conectados (3)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre Host</th>
+                            <th>Tipo Conexión</th>
+                            <th>Dirección IP</th>
+                            <th>MAC Address</th>
+                            <th>Estado de la señal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Galaxy-J4</strong></td>
+                            <td>📶 Wifi 5GHz</td>
+                            <td>192.168.0.15</td>
+                            <td>AA:BB:CC:11:22</td>
+                            <td>
+                                <div class="signal-container sig-good">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+                                        <path
+                                            d="M12.01 21.49L23.64 7c-.45-.34-4.93-4-11.64-4C5.28 3 .81 6.66.36 7l11.63 14.49.01.01.01-.01z" />
+                                    </svg>
+                                    Buena
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Impresora EPSON</strong></td>
+                            <td>🔌 LAN</td>
+                            <td>192.168.0.20</td>
+                            <td>48:5A:3F:11:22:33</td>
+                            <td>
+                                <div class="signal-container">
+                                    <span style="color: #555; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                                        ↔️ Ethernet
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Huawei_P20_lite</strong></td>
+                            <td>📶 Wifi 2.4GHz</td>
+                            <td>192.168.0.45</td>
+                            <td>DD:EE:FF:66:77</td>
+                            <td>
+                                <div class="signal-container sig-bad">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+                                        <path
+                                            d="M12.01 21.49L23.64 7c-.45-.34-4.93-4-11.64-4C5.28 3 .81 6.66.36 7l11.63 14.49.01.01.01-.01z"
+                                            opacity="0.3" />
+                                        <path
+                                            d="M6.67 14.86L12 21.49l5.33-6.63C17.07 14.65 15.03 13 12 13s-5.07 1.65-5.33 1.86z" />
+                                    </svg>
+                                    Débil
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="ajustes" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: var(--tigo-blue);">Mis Redes (SSIDs)</h3>
+                    <span style="font-size: 13px; color: #666;">Configura aquí tus redes 2.4Ghz, 5Ghz e Invitados</span>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre de Red (SSID)</th>
+                            <th>Banda</th>
+                            <th>Tipo</th>
+                            <th>Habilitada</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tigo_Oficina_2.4</strong></td>
+                            <td>2.4 GHz</td>
+                            <td>Principal</td>
+                            <td>
+                                <label class="switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    onclick="openModal('Tigo_Oficina_2.4', '2.4')">Editar</button>
+                                <button class="btn btn-outline">📱 QR</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tigo_Oficina_5G</strong></td>
+                            <td>5 GHz</td>
+                            <td>Principal</td>
+                            <td>
+                                <label class="switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    onclick="openModal('Tigo_Oficina_5G', '5')">Editar</button>
+                                <button class="btn btn-outline">📱 QR</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Visitas_Empresa</strong> <span
+                                    style="font-size: 12px; color: #888;">(Oculta)</span></td>
+                            <td>2.4 GHz</td>
+                            <td>Invitado</td>
+                            <td>
+                                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary"
+                                    onclick="openModal('Visitas_Empresa', '2.4')">Editar</button>
+                                <button class="btn btn-outline" disabled style="opacity: 0.5;">📱 QR</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modal-title" style="margin-top: 0; color: var(--tigo-blue);">Editar Red</h3>
+            <p id="modal-subtitle" style="font-size: 13px; color: #666; margin-top: -10px;">Configurando frecuencia</p>
+
+            <div class="form-group">
+                <label style="font-weight: 500; display: block; margin-bottom: 5px;">Nombre de Red (SSID)</label>
+                <input type="text" id="ssid-input" value="">
+            </div>
+            <div class="form-group">
+                <label style="font-weight: 500; display: block; margin-bottom: 5px;">Contraseña Wi-Fi</label>
+                <input type="password" value="ClaveSegura123">
+            </div>
+
+            <div class="form-group">
+                <label style="font-weight: 500; display: block; margin-bottom: 5px;">Canal de Transmisión</label>
+                <select id="channel-select">
+                </select>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="closeModal()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // LISTAS DE CANALES SEGÚN ESTÁNDAR
+        const channels24 = ["Automático (Recomendado)", "Canal 1", "Canal 6", "Canal 11"];
+        const channels5 = ["Automático (Recomendado)", "Canal 149", "Canal 153", "Canal 157", "Canal 161", "Canal 165"];
+
+        function openModal(ssid, frequency) {
+            // 1. Poner datos básicos
+            document.getElementById('ssid-input').value = ssid;
+            document.getElementById('modal-title').innerText = 'Editar: ' + ssid;
+            document.getElementById('modal-subtitle').innerText = 'Frecuencia detectada: ' + frequency + ' GHz';
+
+            // 2. Lógica para llenar el Select de Canales
+            const select = document.getElementById('channel-select');
+            select.innerHTML = ""; // Limpiar opciones anteriores
+
+            let optionsToAdd = [];
+
+            if (frequency === '5') {
+                optionsToAdd = channels5;
+            } else {
+                optionsToAdd = channels24; // Por defecto o si es 2.4
+            }
+
+            // Crear las opciones en el HTML
+            optionsToAdd.forEach(channel => {
+                let opt = document.createElement('option');
+                opt.value = channel;
+                opt.innerHTML = channel;
+                select.appendChild(opt);
+            });
+
+            // 3. Mostrar Modal
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 
 </body>
+
 </html>
